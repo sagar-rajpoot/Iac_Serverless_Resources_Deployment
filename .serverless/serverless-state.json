@@ -83,124 +83,6 @@
                 ]
               }
             }
-          },
-          "ServerlessDemoLambdaLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/my-serverless-demo-dev-serverlessDemoLambda"
-            }
-          },
-          "IamRoleLambdaExecution": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-              "AssumeRolePolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Principal": {
-                      "Service": [
-                        "lambda.amazonaws.com"
-                      ]
-                    },
-                    "Action": [
-                      "sts:AssumeRole"
-                    ]
-                  }
-                ]
-              },
-              "Policies": [
-                {
-                  "PolicyName": {
-                    "Fn::Join": [
-                      "-",
-                      [
-                        "my-serverless-demo",
-                        "dev",
-                        "lambda"
-                      ]
-                    ]
-                  },
-                  "PolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:CreateLogStream",
-                          "logs:CreateLogGroup"
-                        ],
-                        "Resource": [
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*"
-                          }
-                        ]
-                      },
-                      {
-                        "Effect": "Allow",
-                        "Action": [
-                          "logs:PutLogEvents"
-                        ],
-                        "Resource": [
-                          {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*:*"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ],
-              "Path": "/",
-              "RoleName": {
-                "Fn::Join": [
-                  "-",
-                  [
-                    "my-serverless-demo",
-                    "dev",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    "lambdaRole"
-                  ]
-                ]
-              }
-            }
-          },
-          "ServerlessDemoLambdaLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/my-serverless-demo/dev/1637250713160-2021-11-18T15:51:53.160Z/my-serverless-demo.zip"
-              },
-              "Handler": "handler.myLambda",
-              "Runtime": "nodejs12.x",
-              "FunctionName": "my-serverless-demo-dev-serverlessDemoLambda",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "ServerlessDemoLambdaLogGroup"
-            ]
-          },
-          "ServerlessDemoLambdaLambdaVersionuHxa5M0q5SUhZh7KY6DJiWstBtfWRVAay1pDGVq7A": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "ServerlessDemoLambdaLambdaFunction"
-              },
-              "CodeSha256": "cVYS20pRz9bCVEMI+IoD2QrIhN1R8pPCePonw93wAbQ="
-            }
           }
         },
         "Outputs": {
@@ -210,15 +92,6 @@
             },
             "Export": {
               "Name": "sls-my-serverless-demo-dev-ServerlessDeploymentBucketName"
-            }
-          },
-          "ServerlessDemoLambdaLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "ServerlessDemoLambdaLambdaVersionuHxa5M0q5SUhZh7KY6DJiWstBtfWRVAay1pDGVq7A"
-            },
-            "Export": {
-              "Name": "sls-my-serverless-demo-dev-ServerlessDemoLambdaLambdaFunctionQualifiedArn"
             }
           }
         }
@@ -304,23 +177,10 @@
             }
           }
         }
-      },
-      "vpc": {}
-    },
-    "pluginsData": {},
-    "functions": {
-      "serverlessDemoLambda": {
-        "handler": "handler.myLambda",
-        "events": [],
-        "name": "my-serverless-demo-dev-serverlessDemoLambda",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs12.x",
-        "vpc": {},
-        "versionLogicalId": "ServerlessDemoLambdaLambdaVersionuHxa5M0q5SUhZh7KY6DJiWstBtfWRVAay1pDGVq7A"
       }
     },
+    "pluginsData": {},
+    "functions": {},
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
@@ -332,17 +192,13 @@
         "$ref": "$[\"service\"][\"provider\"]"
       },
       "stage": "dev",
-      "region": "us-east-1",
-      "functions": {
-        "$ref": "$[\"service\"][\"functions\"]"
-      }
+      "region": "us-east-1"
     },
     "layers": {},
-    "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/Users/sagarsinghrajpoot/WorkSpace/Projects/Project.Iac_Serverless_Resources_Deployment/.serverless/my-serverless-demo.zip"
+    "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-serverless-demo/dev/1637250713160-2021-11-18T15:51:53.160Z",
-    "artifact": "my-serverless-demo.zip"
+    "artifactDirectoryName": "serverless/my-serverless-demo/dev/1637251060953-2021-11-18T15:57:40.953Z",
+    "artifact": ""
   }
 }
