@@ -74,7 +74,7 @@
     "ServerlessDemoLambdaLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/project.iac-serverless-resources-deployment-dev-serverlessDemoLambda"
+        "LogGroupName": "/aws/lambda/my-serverless-demo-dev-serverlessDemoLambda"
       }
     },
     "IamRoleLambdaExecution": {
@@ -102,7 +102,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "project.iac-serverless-resources-deployment",
+                  "my-serverless-demo",
                   "dev",
                   "lambda"
                 ]
@@ -119,7 +119,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/project.iac-serverless-resources-deployment-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*"
                     }
                   ]
                 },
@@ -130,7 +130,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/project.iac-serverless-resources-deployment-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*:*"
                     }
                   ]
                 }
@@ -143,7 +143,7 @@
           "Fn::Join": [
             "-",
             [
-              "project.iac-serverless-resources-deployment",
+              "my-serverless-demo",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -161,11 +161,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/project.iac-serverless-resources-deployment/dev/1637250065337-2021-11-18T15:41:05.337Z/project.iac-serverless-resources-deployment.zip"
+          "S3Key": "serverless/my-serverless-demo/dev/1637250713160-2021-11-18T15:51:53.160Z/my-serverless-demo.zip"
         },
         "Handler": "handler.myLambda",
         "Runtime": "nodejs12.x",
-        "FunctionName": "project.iac-serverless-resources-deployment-dev-serverlessDemoLambda",
+        "FunctionName": "my-serverless-demo-dev-serverlessDemoLambda",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -179,14 +179,14 @@
         "ServerlessDemoLambdaLogGroup"
       ]
     },
-    "ServerlessDemoLambdaLambdaVersionJnbBaYEGC1YRZoCmKgCQigxny61ybC5z0RpMdyCk8w": {
+    "ServerlessDemoLambdaLambdaVersionuHxa5M0q5SUhZh7KY6DJiWstBtfWRVAay1pDGVq7A": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ServerlessDemoLambdaLambdaFunction"
         },
-        "CodeSha256": "lUSjQhm1NFKDc1F6yVK6oI3rbRwSe4DO89i1GRqhfKA="
+        "CodeSha256": "cVYS20pRz9bCVEMI+IoD2QrIhN1R8pPCePonw93wAbQ="
       }
     }
   },
@@ -196,16 +196,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-project.iac-serverless-resources-deployment-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-my-serverless-demo-dev-ServerlessDeploymentBucketName"
       }
     },
     "ServerlessDemoLambdaLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ServerlessDemoLambdaLambdaVersionJnbBaYEGC1YRZoCmKgCQigxny61ybC5z0RpMdyCk8w"
+        "Ref": "ServerlessDemoLambdaLambdaVersionuHxa5M0q5SUhZh7KY6DJiWstBtfWRVAay1pDGVq7A"
       },
       "Export": {
-        "Name": "sls-project.iac-serverless-resources-deployment-dev-ServerlessDemoLambdaLambdaFunctionQualifiedArn"
+        "Name": "sls-my-serverless-demo-dev-ServerlessDemoLambdaLambdaFunctionQualifiedArn"
       }
     }
   }
