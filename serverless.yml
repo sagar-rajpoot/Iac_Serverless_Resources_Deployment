@@ -57,9 +57,9 @@ region: us-east-1
 #    - include-me.js
 #    - include-me-dir/**
 
-# functions:
-#   serverlessDemoLambda:
-#     handler: handler.myLambda
+functions:
+  serverlessDemoLambda:
+    handler: handler.myLambda
 
 
 
