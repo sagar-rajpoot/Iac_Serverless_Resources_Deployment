@@ -58,9 +58,9 @@ region: us-east-1
 #    - include-me-dir/**
 
 # My comment - Adding function below
-functions:
-  serverlessDemoLambda:
-    handler: handler.myLambda
+# functions:
+#   serverlessDemoLambda:
+#     handler: handler.myLambda
 
 
 
@@ -115,7 +115,7 @@ functions:
 
 # My comment - Adding Resources below 
 resources:
-  - "${file(resources/s3.yml)}"
+  # - "${file(resources/s3.yml)}"
 
 
 
