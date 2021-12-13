@@ -70,6 +70,130 @@
           ]
         }
       }
+    },
+    "ServerlessDemoLambdaLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/my-serverless-demo-dev-serverlessDemoLambda"
+      }
+    },
+    "IamRoleLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "my-serverless-demo",
+                  "dev",
+                  "lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:CreateLogGroup"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-serverless-demo-dev*:*:*"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "Path": "/",
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "my-serverless-demo",
+              "dev",
+              {
+                "Ref": "AWS::Region"
+              },
+              "lambdaRole"
+            ]
+          ]
+        }
+      }
+    },
+    "ServerlessDemoLambdaLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/my-serverless-demo/dev/1639423182327-2021-12-13T19:19:42.327Z/my-serverless-demo.zip"
+        },
+        "Handler": "handler.myLambda",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "my-serverless-demo-dev-serverlessDemoLambda",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "ServerlessDemoLambdaLogGroup"
+      ]
+    },
+    "ServerlessDemoLambdaLambdaVersionHHJDOCDjYgbsxUBa0niEV0CsRu97DqWk4LqgMek8w": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "ServerlessDemoLambdaLambdaFunction"
+        },
+        "CodeSha256": "ZV+0jxgPH0JzPcTozWy+zU5X+bFCKgQhoTWd22k50ZQ="
+      }
+    },
+    "NewResource": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "my-test-bucket-9986706015"
+      }
     }
   },
   "Outputs": {
@@ -79,6 +203,15 @@
       },
       "Export": {
         "Name": "sls-my-serverless-demo-dev-ServerlessDeploymentBucketName"
+      }
+    },
+    "ServerlessDemoLambdaLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "ServerlessDemoLambdaLambdaVersionHHJDOCDjYgbsxUBa0niEV0CsRu97DqWk4LqgMek8w"
+      },
+      "Export": {
+        "Name": "sls-my-serverless-demo-dev-ServerlessDemoLambdaLambdaFunctionQualifiedArn"
       }
     }
   }

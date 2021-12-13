@@ -57,6 +57,7 @@ region: us-east-1
 #    - include-me.js
 #    - include-me-dir/**
 
+# My comment - Adding function below
 functions:
   serverlessDemoLambda:
     handler: handler.myLambda
@@ -104,12 +105,20 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
+# resources:
 #  Resources:
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:
-#        BucketName: my-new-bucket
+#        BucketName: my-test-bucket-9986706015
+
+
+# My comment - Adding Resources below 
+resources:
+  - "${file(resources/s3.yml)}"
+
+
+
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
