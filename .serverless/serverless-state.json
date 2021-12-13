@@ -83,6 +83,16 @@
                 ]
               }
             }
+          },
+          "myCluster": {
+            "Type": "AWS::Redshift::Cluster",
+            "Properties": {
+              "DBName": "sagardb",
+              "MasterUsername": "master",
+              "MasterUserPassword": "Master#123",
+              "NodeType": "ds2.xlarge",
+              "ClusterType": "single-node"
+            }
           }
         },
         "Outputs": {
@@ -181,7 +191,21 @@
     },
     "pluginsData": {},
     "functions": {},
-    "resources": null,
+    "resources": {
+      "Resources": {
+        "myCluster": {
+          "Type": "AWS::Redshift::Cluster",
+          "Properties": {
+            "DBName": "sagardb",
+            "MasterUsername": "master",
+            "MasterUserPassword": "Master#123",
+            "NodeType": "ds2.xlarge",
+            "ClusterType": "single-node"
+          }
+        }
+      },
+      "Outputs": {}
+    },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
@@ -194,13 +218,15 @@
       },
       "stage": "dev",
       "region": "us-east-1",
-      "resources": null
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
+      }
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-serverless-demo/dev/1639423558007-2021-12-13T19:25:58.007Z",
+    "artifactDirectoryName": "serverless/my-serverless-demo/dev/1639427017804-2021-12-13T20:23:37.804Z",
     "artifact": ""
   }
 }

@@ -116,6 +116,7 @@ region: us-east-1
 # My comment - Adding Resources below 
 resources:
   # - "${file(resources/s3.yml)}"
+  - "${file(resources/redshift.yml)}"
 
 
 

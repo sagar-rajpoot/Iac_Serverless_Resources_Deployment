@@ -70,6 +70,16 @@
           ]
         }
       }
+    },
+    "myCluster": {
+      "Type": "AWS::Redshift::Cluster",
+      "Properties": {
+        "DBName": "sagardb",
+        "MasterUsername": "master",
+        "MasterUserPassword": "Master#123",
+        "NodeType": "ds2.xlarge",
+        "ClusterType": "single-node"
+      }
     }
   },
   "Outputs": {
