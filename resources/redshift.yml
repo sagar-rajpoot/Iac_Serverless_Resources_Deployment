@@ -1,12 +1,23 @@
 Resources:
   myCluster: 
-    Type: "AWS::Redshift::Cluster"
-    Properties:
-      DBName: "sagardb"
-      MasterUsername: "master"
-      MasterUserPassword: "Master#123"
-      NodeType: "ds2.xlarge"
-      ClusterType: "single-node"
-      # Tags:
-      #   - Key: foo
-      #     Value: bar
+    Type: AWS::Redshift::Cluster
+    Properties: 
+      ClusterIdentifier: sagarredshift
+      # ClusterParameterGroupName: sagartestclustergroup
+      # ClusterSecurityGroups: 
+      #   - String
+      # ClusterSubnetGroupName: arn:aws:ec2:us-east-1:697701950421:subnet/subnet-0e51d68a1b0fb6708
+      ClusterType: single-node
+      DBName: sagarfirstdb
+      IamRoles: 
+        - arn:aws:iam::697701950421:role/sagar_redshift_role
+      MasterUsername: sagarclusteradmin
+      MasterUserPassword: Master#123
+      NodeType: dc2.large
+      # NumberOfNodes: 1
+      # PreferredMaintenanceWindow: String
+      # PubliclyAccessible: Boolean
+      # Tags: 
+      #   - Tag
+      # VpcSecurityGroupIds: 
+      #   - String
