@@ -32,6 +32,8 @@ you can see -
 - a zip file for your project ( like artifacts )
 - Serverless-state.json ( state file for serverless)
 
+Test Deployment
+
 
 
 
